@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/UserActivitiesTestApp.Domain/Entities/User.cs
+/UserActivitiesTestApp.Domain/Entities/Activity.cs
+/UserActivitiesTestApp/Migrations/ApplicationDbContextModelSnapshot.cs

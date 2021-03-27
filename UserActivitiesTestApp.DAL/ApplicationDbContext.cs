@@ -7,7 +7,7 @@ using UserActivitiesTestApp.Domain.Entities;
 
 namespace UserActivitiesTestApp.DAL
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -19,9 +19,12 @@ namespace UserActivitiesTestApp.DAL
             builder.Entity<Activity>()
                 .HasOne(act => act.User)
                 .WithMany(us => us.Activity);
-
-            builder.Entity<Activity>()
-                .Property(x => x.Id).HasDefaultValueSql("NewSequentialId()");
+            builder.Entity<RandomUrlStorage>()
+                .HasOne(act => act.User)
+                .WithMany(us => us.RandomUrlStorage);
         }
+
+        public DbSet<Activity> Activity { get; set; }
+        public DbSet<RandomUrlStorage> RandomUrlStorage { get; set; }
     }
 }

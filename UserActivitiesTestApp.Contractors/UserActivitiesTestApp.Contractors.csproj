@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DAL\" />
-    <Folder Include="Logic\" />
+    <ProjectReference Include="..\UserActivitiesTestApp.BO\UserActivitiesTestApp.BO.csproj" />
+    <ProjectReference Include="..\UserActivitiesTestApp.Domain\UserActivitiesTestApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

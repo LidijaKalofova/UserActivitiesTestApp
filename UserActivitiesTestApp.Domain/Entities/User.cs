@@ -13,5 +13,6 @@ namespace UserActivitiesTestApp.Domain.Entities
         [Required]
         public string LastName { get; set; }
         public virtual ICollection<Activity> Activity { get; set; }
+        public virtual ICollection<RandomUrlStorage> RandomUrlStorage { get; set; }
     }
 }

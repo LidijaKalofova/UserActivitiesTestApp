@@ -1,0 +1,33 @@
+﻿@using UserActivitiesTestApp.BO.Models
+@model ActivityViewModel
+
+@{
+    ViewData["Title"] = "Activity";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form id="form1" style="width: 760px; margin: auto">
+        <div id="wrapper">
+            <div id="content">
+                <h1 class="text-center ">Welcome to User Activity App</h1>
+            </div>
+        </div>
+    </form>
+    
+}
+else
+{
+    <a asp-controller="Activity" asp-action="Activity">Login</a>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+
+
+

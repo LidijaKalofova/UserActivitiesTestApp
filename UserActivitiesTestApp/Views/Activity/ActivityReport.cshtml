@@ -1,0 +1,137 @@
+﻿@using UserActivitiesTestApp.BO.Models
+@model UserActivitiesTestApp.BO.Models.ActivityReportViewModel
+
+@{
+    ViewData["Title"] = User.Identity.Name + " " + "Activity Report";
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-controller="Activity" asp-action="ActivitiesByDateRange" method="post">
+        <div class="container">
+            <div class="row ">
+                <div class="col-xs-6 col-md-4 form-group">
+                    <div class='input-group date'>
+                        <input asp-for="DateFrom" type="datetime" class="form-control datetimefilter" autocomplete="off" placeholder="Date from" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <span asp-validation-for="DateFrom" class="text-danger"></span>
+                </div>
+                <div class="col-xs-6 col-md-4  form-group">
+                    <div class='input-group date'>
+                        <input asp-for="DateTo" type="text" class="form-control datetimefilter" autocomplete="off" placeholder="Date to" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <span asp-validation-for="DateTo" class="text-danger"></span>
+                </div>
+
+                <div class="col-xs-6 col-md-4">
+                    <button type="submit" value="Filter" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form asp-controller="Activity" asp-action="ActivityReport" method="get">
+
+        <table id="activityTable" class="table table-striped table-bordered dt-responsive" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Activity Name</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Time spent</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (null != Model.ActivityList)
+                {
+                    @foreach (var item in Model.ActivityList)
+                    {
+                        <tr>
+                            <td>@item.ActivityName</td>
+                            <td>@item.ActivityStart</td>
+                            <td>@item.ActivityEnd</td>
+                            <td>@item.TimeSpent</td>
+                            <td>@item.Description</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Activity Name</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Time spent</th>
+                    <th>Description</th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div id="modal-placeholder"></div>
+    </form>
+
+    <button id='open' class="btn btn-primary" data-toggle="modal" data-target="#showmodal">Send Report</button>
+
+    <div id="showmodal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="post" asp-controller="Activity" asp-action="SendEmail">
+
+                    <input type="hidden" asp-for="DateFrom" />
+                    <input type="hidden" asp-for="DateTo" />
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Send report</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label asp-for="EmailViewModel.SenderEmail"></label>
+                            <input asp-for="EmailViewModel.SenderEmail" class="form-control" placeholder="Sender E-mail" />
+                            <span asp-validation-for="EmailViewModel.SenderEmail" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EmailViewModel.SenderPassword"></label>
+                            <input asp-for="EmailViewModel.SenderPassword" class="form-control" placeholder="Sender Password" />
+                            <span asp-validation-for="EmailViewModel.SenderPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EmailViewModel.EmailReceiver"></label>
+                            <input asp-for="EmailViewModel.EmailReceiver" class="form-control" placeholder="Recipient E-mail" />
+                            <span asp-validation-for="EmailViewModel.EmailReceiver" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
+                        <input type="Submit" class="btn btn-success" value="Send" />
+                    </div>                   
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+else
+{
+    <a asp-controller="Activity" asp-action="Activity">Login</a>
+}
+
+@section Scripts {
+    <!-- For the DataTables grid -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+
+    <!-- Page-specific script -->
+    <script src="~/js/UserActivitiesTable.js" asp-append-version="true"></script>
+
+
+}

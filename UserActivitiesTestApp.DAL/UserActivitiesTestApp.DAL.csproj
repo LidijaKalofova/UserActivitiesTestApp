@@ -5,14 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UserActivitiesTestApp.Contractors\UserActivitiesTestApp.Contractors.csproj" />
     <ProjectReference Include="..\UserActivitiesTestApp.Domain\UserActivitiesTestApp.Domain.csproj" />
   </ItemGroup>
 

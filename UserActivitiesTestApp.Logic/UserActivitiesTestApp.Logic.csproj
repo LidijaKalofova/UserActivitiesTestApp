@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Managers\" />
+    <ProjectReference Include="..\UserActivitiesTestApp.Contractors\UserActivitiesTestApp.Contractors.csproj" />
   </ItemGroup>
 
 </Project>

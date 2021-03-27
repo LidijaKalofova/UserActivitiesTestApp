@@ -1,0 +1,70 @@
+﻿@using UserActivitiesTestApp.BO.Models
+@model ActivityViewModel
+
+@{
+    ViewData["Title"] = "Add Activity";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-controller="Activity" asp-action="AddActivity">
+                <h4>Add new activity.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ActivityName"></label>
+                    <input asp-for="ActivityName" class="form-control" />
+                    <span asp-validation-for="ActivityName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ActivityStart" class="control-label"></label>
+                    <div class='input-group date'>
+                        <input asp-for="ActivityStart" type="text" class="form-control" id="txt_date_fr" autocomplete="off" />
+                        <span class="input-group-addon" style="cursor:pointer">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <span asp-validation-for="ActivityStart" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ActivityEnd" class="control-label"></label>
+                    <div class='input-group date'>
+                        <input asp-for="ActivityEnd" type="text" class="form-control" id="txt_date_to" autocomplete="off" />
+                        <span class="input-group-addon" style="cursor:pointer">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <span asp-validation-for="ActivityEnd" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add activity</button>
+            </form>
+
+        </div>
+
+    </div>
+}
+else
+{
+    <a asp-controller="Home" asp-action="Login">Login</a>
+}
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+   
+}
+
+
+
+
+
+
+

@@ -18,11 +18,20 @@ namespace UserActivitiesTestApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //[Route("/Account/Login")]
+        //[Route("/")]
+        //public IActionResult Login()
+        //{
+        //    return LocalRedirect("/Identity/Account/Login");
+        //}
 
+        ////[Route("/Account/Login")]
+        //[Route("/")]
+        //public IActionResult Test()
+        //{
+        //    return RedirectToRoute("default",
+        //    new { controller = "Home", action = "Privacy" });
+        //}
         public IActionResult Privacy()
         {
             return View();

@@ -40,9 +40,8 @@ namespace UserActivitiesTestApp.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,12 +73,13 @@ namespace UserActivitiesTestApp.Migrations
                 name: "Activity",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false, defaultValueSql: "NewSequentialId()"),
-                    ActivityName = table.Column<string>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     ActivityDateAdded = table.Column<DateTime>(nullable: false),
+                    ActivityName = table.Column<string>(nullable: false),
                     ActivityStart = table.Column<DateTime>(nullable: false),
                     ActivityEnd = table.Column<DateTime>(nullable: false),
-                    TimeSpent = table.Column<TimeSpan>(nullable: false),
+                    ActivityTimeSpent = table.Column<int>(nullable: false),
+                    TimeSpent = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },

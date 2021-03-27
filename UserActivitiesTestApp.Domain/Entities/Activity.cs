@@ -6,22 +6,16 @@ using System.Text;
 
 namespace UserActivitiesTestApp.Domain.Entities
 {
-    public class Activity
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+    public class Activity : BaseEntity
+    {        
         [Required]
         public string ActivityName { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{dd-MM-yyyy}")]
-        public DateTime ActivityDateAdded { get; set; } = DateTime.Now;
         [Required]
         public DateTime ActivityStart { get; set; }
         [Required]
         public DateTime ActivityEnd { get; set; }
-        public TimeSpan TimeSpent { get; set; }
+        public long ActivityTimeSpent { get; set; }
+        public string TimeSpent { get; set; }
         public string Description { get; set; }
         [Required]
         public string UserId { get; set; }

@@ -8,7 +8,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using UserActivitiesTestApp.Contractors.DAL;
+using UserActivitiesTestApp.Contractors.Logic;
 using UserActivitiesTestApp.DAL;
+using UserActivitiesTestApp.DAL.Repositories;
+using UserActivitiesTestApp.Domain.Entities;
+using UserActivitiesTestApp.Logic.Managers;
 
 namespace UserActivitiesTestApp
 {
@@ -27,9 +32,10 @@ namespace UserActivitiesTestApp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"), o => o.MigrationsAssembly("UserActivitiesTestApp")));
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<User>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;
+                
                 // Password settings.
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
@@ -47,9 +53,30 @@ namespace UserActivitiesTestApp
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
+                
             }
            )
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultUI()
+            .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ILogicManager, LogicManager>();
+            services.AddScoped<IActivityManager, ActivityManager>();
+
+            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddControllers();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -80,7 +107,7 @@ namespace UserActivitiesTestApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Activity}/{action=Activity}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

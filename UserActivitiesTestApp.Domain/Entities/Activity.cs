@@ -11,8 +11,10 @@ namespace UserActivitiesTestApp.Domain.Entities
         [Required]
         public string ActivityName { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime ActivityStart { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime ActivityEnd { get; set; }
         public long ActivityTimeSpent { get; set; }
         public string TimeSpent { get; set; }

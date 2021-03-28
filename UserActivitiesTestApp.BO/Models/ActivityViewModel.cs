@@ -15,11 +15,11 @@ namespace UserActivitiesTestApp.BO.Models
         public DateTime ActivityDateAdded { get; set; } = DateTime.Now;
         [DataType(DataType.Date)]
         [Display(Name = "Activity Start:")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm A}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:DD-M-YYYY hh:mm A}", ApplyFormatInEditMode = true)]
         public DateTime ActivityStart { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Activity End:")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm A}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:DD-M-YYYY hh:mm A}", ApplyFormatInEditMode = true)]
         public DateTime ActivityEnd { get; set; }
         [Display(Name = "Time spent")]
         public string TimeSpent { get; set; }

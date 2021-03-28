@@ -49,25 +49,34 @@ namespace UserActivitiesTestApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddActivity(ActivityViewModel activityViewModel)
         {
-            if (ModelState.IsValid)
+            try 
             {
-                activityViewModel.Id = Guid.NewGuid();
-                var timeDiff = activityViewModel.ActivityEnd.Subtract(activityViewModel.ActivityStart);
-                activityViewModel.ActivityTimeSpent = timeDiff.Ticks;
-                activityViewModel.TimeSpent = string.Format("{0} years {1} months {2} days {3} hours {4} minutes {5} seconds",
-                                                    (int)timeDiff.TotalDays / 365,
-                                                    (int)(timeDiff.TotalDays % 365) / 30,
-                                                    timeDiff.Days % 30,
-                                                    timeDiff.Hours,
-                                                    timeDiff.Minutes,
-                                                    timeDiff.Seconds);
-                activityViewModel.UserId = GetCurrentUserId().Result;
+                if (ModelState.IsValid)
+                {
+                    activityViewModel.Id = Guid.NewGuid();
+                    var timeDiff = activityViewModel.ActivityEnd.Subtract(activityViewModel.ActivityStart);
+                    activityViewModel.ActivityTimeSpent = timeDiff.Ticks;
+                    activityViewModel.TimeSpent = string.Format("{0} years {1} months {2} days {3} hours {4} minutes {5} seconds",
+                                                        (int)timeDiff.TotalDays / 365,
+                                                        (int)(timeDiff.TotalDays % 365) / 30,
+                                                        timeDiff.Days % 30,
+                                                        timeDiff.Hours,
+                                                        timeDiff.Minutes,
+                                                        timeDiff.Seconds);
+                    activityViewModel.UserId = GetCurrentUserId().Result;
 
-                await _logicManager.ActivityManager.InsertActivity(activityViewModel);
+                    await _logicManager.ActivityManager.InsertActivity(activityViewModel);
+                }
+
+                return View("AddActivity", activityViewModel);
             }
-
-            return View("AddActivity", activityViewModel);
-
+            catch(Exception ex)
+            {
+                ErrorViewModel errorViewModel = new ErrorViewModel();
+                errorViewModel.ErrorMessage = ex.Message;
+                return RedirectToAction("Error", errorViewModel);
+            }
+            
         }
 
         //Activity Report loads table with Activities by logged in user
@@ -147,7 +156,7 @@ namespace UserActivitiesTestApp.Controllers
                 RandomUrlStorageViewModel randomUrlStorageViewModel = new RandomUrlStorageViewModel();
                 randomUrlStorageViewModel.UserId = GetCurrentUserId().Result;
                 randomUrlStorageViewModel.ShortUrl = Guid.NewGuid().ToString();
-                randomUrlStorageViewModel.UrlString = "https://localhost:44360/UserActivityReport/UserActivityReport/" + randomUrlStorageViewModel.ShortUrl;
+                randomUrlStorageViewModel.UrlString = "https://useractivitiestestapp20210327105841.azurewebsites.net/UserActivityReport/UserActivityReport/" + randomUrlStorageViewModel.ShortUrl;
                 randomUrlStorageViewModel.SelectedDateFrom = activityReportViewModel.DateFrom;
                 randomUrlStorageViewModel.SelectedDateTo = activityReportViewModel.DateTo;
                 await _logicManager.RandomUrlStorageManager.InsertRandomUrl(randomUrlStorageViewModel);

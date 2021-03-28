@@ -70,7 +70,10 @@ namespace UserActivitiesTestApp
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
-
+            var supportedCultures = new[] { "en-GB" };
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ILogicManager, LogicManager>();
             services.AddScoped<IActivityManager, ActivityManager>();

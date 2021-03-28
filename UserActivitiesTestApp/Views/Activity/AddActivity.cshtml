@@ -24,23 +24,13 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ActivityStart" class="control-label"></label>
-                    <div class='input-group date'>
-                        <input asp-for="ActivityStart" type="text" class="form-control" id="txt_date_fr" autocomplete="off" />
-                        <span class="input-group-addon" style="cursor:pointer">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
+                    <label asp-for="ActivityStart"></label>
+                    <input type="datetime-local" asp-for="ActivityStart" class="form-control" />
                     <span asp-validation-for="ActivityStart" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ActivityEnd" class="control-label"></label>
-                    <div class='input-group date'>
-                        <input asp-for="ActivityEnd" type="text" class="form-control" id="txt_date_to" autocomplete="off" />
-                        <span class="input-group-addon" style="cursor:pointer">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
+                    <label asp-for="ActivityEnd"></label>
+                    <input type="datetime-local" asp-for="ActivityEnd" class="form-control"/>
                     <span asp-validation-for="ActivityEnd" class="text-danger"></span>
                 </div>
 

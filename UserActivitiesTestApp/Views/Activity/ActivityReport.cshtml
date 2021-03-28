@@ -9,30 +9,24 @@
     <form asp-controller="Activity" asp-action="ActivitiesByDateRange" method="post">
         <div class="container">
             <div class="row ">
-                <div class="col-xs-6 col-md-4 form-group">
-                    <div class='input-group date'>
-                        <input asp-for="DateFrom" type="datetime" class="form-control datetimefilter" autocomplete="off" placeholder="Date from" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
+
+                <div class="form-group">
+                    <label asp-for="DateFrom" style="display: inline-block;"></label>
+                    <input type="datetime-local" asp-for="DateFrom" class="form-control"/>
                     <span asp-validation-for="DateFrom" class="text-danger"></span>
                 </div>
-                <div class="col-xs-6 col-md-4  form-group">
-                    <div class='input-group date'>
-                        <input asp-for="DateTo" type="text" class="form-control datetimefilter" autocomplete="off" placeholder="Date to" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="DateTo"></label>
+                    <input type="datetime-local" asp-for="DateTo" class="form-control" />
                     <span asp-validation-for="DateTo" class="text-danger"></span>
                 </div>
-
-                <div class="col-xs-6 col-md-4">
+                
+                <div class="col-xs-6 col-md-4" text-center">
                     <button type="submit" value="Filter" class="btn btn-primary">Filter</button>
                 </div>
+                
             </div>
-        </div>
+            </div>
     </form>
 
     <form asp-controller="Activity" asp-action="ActivityReport" method="get">
@@ -110,7 +104,7 @@
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
                         <input type="Submit" class="btn btn-success" value="Send" />
-                    </div>                   
+                    </div>
                 </form>
             </div>
         </div>

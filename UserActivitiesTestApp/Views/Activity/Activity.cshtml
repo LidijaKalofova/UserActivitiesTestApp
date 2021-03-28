@@ -7,14 +7,18 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <form id="form1" style="width: 760px; margin: auto">
-        <div id="wrapper">
-            <div id="content">
-                <h1 class="text-center ">Welcome to User Activity App</h1>
-            </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <form>
+                <div id="wrapper">
+                    <div id="content">
+                        <h1>Welcome!</h1>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
-    
+    </div>
+
 }
 else
 {

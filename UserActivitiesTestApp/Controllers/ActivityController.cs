@@ -47,7 +47,7 @@ namespace UserActivitiesTestApp.Controllers
 
         //Adds activity by current logged in user and calculates time spent on that activity
         [HttpPost]
-        public async Task<IActionResult> AddActivity(ActivityViewModel activityViewModel)
+        public async Task<IActionResult> AddsActivity(ActivityViewModel activityViewModel)
         {
             try 
             {
@@ -68,7 +68,7 @@ namespace UserActivitiesTestApp.Controllers
                     await _logicManager.ActivityManager.InsertActivity(activityViewModel);
                 }
 
-                return View("AddActivity", activityViewModel);
+                return RedirectToAction("AddActivity");
             }
             catch(Exception ex)
             {
@@ -156,7 +156,8 @@ namespace UserActivitiesTestApp.Controllers
                 RandomUrlStorageViewModel randomUrlStorageViewModel = new RandomUrlStorageViewModel();
                 randomUrlStorageViewModel.UserId = GetCurrentUserId().Result;
                 randomUrlStorageViewModel.ShortUrl = Guid.NewGuid().ToString();
-                randomUrlStorageViewModel.UrlString = "https://useractivitiestestapp20210327105841.azurewebsites.net/UserActivityReport/UserActivityReport/" + randomUrlStorageViewModel.ShortUrl;
+                //randomUrlStorageViewModel.UrlString = "https://useractivitiestestapp20210327105841.azurewebsites.net/UserActivityReport/UserActivityReport/" + randomUrlStorageViewModel.ShortUrl;  //azure url
+                randomUrlStorageViewModel.UrlString = "https://localhost:44360/UserActivityReport/UserActivityReport/" + randomUrlStorageViewModel.ShortUrl;   //localhost url
                 randomUrlStorageViewModel.SelectedDateFrom = activityReportViewModel.DateFrom;
                 randomUrlStorageViewModel.SelectedDateTo = activityReportViewModel.DateTo;
                 await _logicManager.RandomUrlStorageManager.InsertRandomUrl(randomUrlStorageViewModel);

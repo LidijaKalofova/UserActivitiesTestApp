@@ -22,6 +22,7 @@ namespace UserActivitiesTestApp.BO.Models
         public string TotalTimeSpent { get; set; }
         public EmailViewModel EmailViewModel { get; set; }
         public RandomUrlStorageViewModel RandomUrlStorageViewModel { get; set; }
+        public ActivityViewModel ActivityViewModel { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

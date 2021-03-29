@@ -11,16 +11,16 @@
             <div class="row ">
                 <div class="col-xs-6 col-md-4 form-group">
                     <div class="form-group">
+                        @{string dateFrom = Model.RandomUrlStorageViewModel.SelectedDateFrom.ToString();}
                         <label asp-for="RandomUrlStorageViewModel.SelectedDateFrom"></label>
-                        <input asp-for="RandomUrlStorageViewModel.SelectedDateFrom" class="form-control" readonly />
-                        <span asp-validation-for="RandomUrlStorageViewModel.SelectedDateFrom" class="text-danger"></span>
+                        <input asp-for="@dateFrom" class="form-control" readonly />
                     </div>
                 </div>
                 <div class="col-xs-6 col-md-4 form-group">
                     <div class="form-group">
+                        @{string dateTo = Model.RandomUrlStorageViewModel.SelectedDateTo.ToString();}
                         <label asp-for="RandomUrlStorageViewModel.SelectedDateTo"></label>
-                        <input asp-for="RandomUrlStorageViewModel.SelectedDateTo" class="form-control" readonly/>
-                        <span asp-validation-for="RandomUrlStorageViewModel.SelectedDateTo" class="text-danger"></span>
+                        <input asp-for="@dateTo" class="form-control" readonly />                        
                     </div>
                 </div>
                 
